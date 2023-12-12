@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import RSSParser from 'rss-parser';
+const PORT = process.env.PORT || 4000;
 
 const mediumUrl = 'https://medium.com/feed/@fitnessspace.ng';
 
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
   res.send(articles);
 });
 
-const server = app.listen('4000', () => {
+const server = app.listen(PORT, () => {
   console.log('App is listening at http://localhost:4000');
 });
 
