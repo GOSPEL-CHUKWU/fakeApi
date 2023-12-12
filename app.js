@@ -11,7 +11,7 @@ let articles = [];
 const parse = async url => {
   try {
     const feed = await parser.parseURL(url);
-    feed.items.forEach(item => {
+    feed.items.map(item => {
       articles.push({ item });
     });
   } catch (err) {
@@ -20,12 +20,11 @@ const parse = async url => {
   }
 };
 
-parse(mediumUrl);
-
 let app = express();
 app.use(cors());
 
 app.get('/', (req, res) => {
+  parse(mediumUrl);
   res.send(articles);
 });
 
