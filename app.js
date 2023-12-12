@@ -5,7 +5,9 @@ const PORT = process.env.PORT || 4000;
 
 const mediumUrl = 'https://medium.com/feed/@fitnessspace.ng';
 
-const parser = new RSSParser();
+const parser = new RSSParser({
+  timeout: 1000,
+});
 let articles = [];
 
 const parse = async url => {
