@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 4000;
 
 const mediumUrl = 'https://medium.com/feed/@fitnessspace.ng';
 
-const parser = new RSSParser({ maxRedirects: 100 });
+const parser = new RSSParser();
 let articles = [];
 
 const parse = async url => {
@@ -15,7 +15,7 @@ const parse = async url => {
       articles.push({ item });
     });
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
     throw err;
   }
 };
