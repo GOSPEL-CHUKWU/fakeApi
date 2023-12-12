@@ -8,21 +8,19 @@ const mediumUrl = 'https://medium.com/feed/@fitnessspace.ng';
 const parser = new RSSParser();
 let articles = [];
 
-(async () => {
+const parse = async url => {
   try {
-    const feed = await parser.parseURL(
-      'https://medium.com/feed/@fitnessspace.ng'
-    );
+    const feed = await parser.parseURL(url);
     feed.items.forEach(item => {
       articles.push({ item });
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     throw err;
   }
-})();
+};
 
-// parse(mediumUrl);
+parse(mediumUrl);
 
 let app = express();
 app.use(cors());
