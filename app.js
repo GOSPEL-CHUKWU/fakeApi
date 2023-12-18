@@ -11,7 +11,6 @@ let articles = [];
 const parse = async url => {
   try {
     const feed = await parser.parseURL(url);
-    console.log(feed);
     feed.items.map(item => {
       articles.push({ item });
     });
