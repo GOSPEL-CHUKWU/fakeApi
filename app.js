@@ -6,30 +6,26 @@ const PORT = process.env.PORT || 4000;
 const mediumUrl = 'https://medium.com/feed/@fitnessspace.ng';
 
 const parser = new RSSParser();
-let articles = [];
-
-const parse = async url => {
-  try {
-    const feed = await parser.parseURL(url);
-    feed.items.map(item => {
-      articles.push({ item });
-    });
-  } catch (err) {
-    console.log(err.message);
-    throw err;
-  }
-};
 
 let app = express();
 app.use(cors());
 
 app.get('/', async (req, res) => {
-  await parse(mediumUrl);
-  res.send(articles);
+  let articles = [];
+  try {
+    const feed = await parser.parseURL(mediumUrl);
+    feed.items.map(item => {
+      articles.push({ item });
+    });
+    res.send(articles);
+  } catch (err) {
+    console.log(err.message);
+    throw err;
+  }
 });
 
 const server = app.listen(PORT, () => {
-  console.log('App is listening at http://localhost:4000');
+  console.log(`App is listening at localhost:${PORT}`);
 });
 
 export default server;
